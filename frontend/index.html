@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Office AI Hub - DEWA</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="header-logo">
+                <span class="logo-icon">🚀</span>
+                <h1>AI Hub</h1>
+            </div>
+            <div class="header-user">
+                <div class="user-info">
+                    <span id="userDisplayName">Loading...</span>
+                    <small id="userRole">Employee</small>
+                </div>
+                <div class="user-avatar" id="userAvatar">U</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="app-sidebar">
+            <div class="nav-section">
+                <div class="nav-label">Dashboard</div>
+                <a href="#" class="nav-link active" data-section="scorecard">
+                    <span class="nav-icon">📊</span>
+                    <span>My Score Card</span>
+                </a>
+                <a href="#" class="nav-link" data-section="leaderboard">
+                    <span class="nav-icon">🏆</span>
+                    <span>Leaderboard</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-label">Discovery</div>
+                <a href="#" class="nav-link" data-section="tools">
+                    <span class="nav-icon">🛠️</span>
+                    <span>AI Tools</span>
+                </a>
+                <a href="#" class="nav-link" data-section="learning">
+                    <span class="nav-icon">📚</span>
+                    <span>Learning</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-label">Value</div>
+                <a href="#" class="nav-link" data-section="roi">
+                    <span class="nav-icon">💼</span>
+                    <span>ROI Tracking</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-label">Intelligence</div>
+                <a href="#" class="nav-link" data-section="ai-insights">
+                    <span class="nav-icon">🧠</span>
+                    <span>AI Insights</span>
+                </a>
+                <a href="#" class="nav-link" data-section="recommendations">
+                    <span class="nav-icon">✨</span>
+                    <span>Recommendations</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-label">More</div>
+                <a href="#" class="nav-link" data-section="settings">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="loading-indicator">
+                <div class="spinner"></div>
+                <p>Loading...</p>
+            </div>
+
+            <!-- Scorecard Section -->
+            <section id="scorecard-section" class="content-section active">
+                <div class="section-header">
+                    <h2>Your AI Adoption Journey</h2>
+                    <p class="section-subtitle">Track your progress and discover new opportunities</p>
+                </div>
+
+                <!-- Score Display -->
+                <div class="scorecard-grid">
+                    <div class="score-card big-score">
+                        <div class="score-label">Your Adoption Score</div>
+                        <div class="score-value" id="currentScore">--</div>
+                        <div class="score-delta" id="scoreChange">
+                            <span id="scoreTrend">→</span> vs last month
+                        </div>
+                    </div>
+
+                    <div class="score-card">
+                        <div class="score-label">Tasks Automated</div>
+                        <div class="score-value" id="tasksAutomated" style="color: #00a651;">--</div>
+                        <div style="font-size: 0.85em; color: #999; margin-top: 8px;">this month</div>
+                    </div>
+
+                    <div class="score-card">
+                        <div class="score-label">Hours Saved</div>
+                        <div class="score-value" id="hoursSaved" style="color: #00a651;">--</div>
+                        <div style="font-size: 0.85em; color: #999; margin-top: 8px;">estimated</div>
+                    </div>
+
+                    <div class="score-card">
+                        <div class="score-label">Tools Used</div>
+                        <div class="score-value" id="toolsUsed">--</div>
+                        <div style="font-size: 0.85em; color: #999; margin-top: 8px;">approved tools</div>
+                    </div>
+                </div>
+
+                <!-- Comparison -->
+                <div class="comparison-panel">
+                    <h3>Department Comparison</h3>
+                    <div class="comparison-bars">
+                        <div class="comparison-item">
+                            <label>You</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="userProgress" style="width: 0%"></div>
+                            </div>
+                            <span id="userCompScore">--</span>
+                        </div>
+                        <div class="comparison-item">
+                            <label>Department Avg</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="deptProgress" style="width: 0%"></div>
+                            </div>
+                            <span id="deptCompScore">--</span>
+                        </div>
+                        <div class="comparison-item">
+                            <label>Organization Avg</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="orgProgress" style="width: 0%"></div>
+                            </div>
+                            <span id="orgCompScore">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trend Chart -->
+                <div class="chart-container">
+                    <h3>Your 6-Month Trend</h3>
+                    <canvas id="trendChart" class="trend-chart"></canvas>
+                    <p style="text-align: center; color: #999; margin-top: 16px; font-size: 0.9em;">
+                        Your adoption score over the last 6 months
+                    </p>
+                </div>
+            </section>
+
+            <!-- Leaderboard Section -->
+            <section id="leaderboard-section" class="content-section">
+                <div class="section-header">
+                    <h2>Leaderboard</h2>
+                    <p class="section-subtitle">Celebrate excellence and recognize innovation</p>
+                </div>
+
+                <div class="leaderboard-container">
+                    <h3>🏆 Top Performers (Your Department)</h3>
+                    <div class="leaderboard-list" id="leaderboardList">
+                        <!-- Top Performer 1 -->
+                        <div style="display: flex; align-items: center; padding: 16px; border-bottom: 1px solid #eee; background: linear-gradient(90deg, rgba(0,166,81,0.1) 0%, transparent 100%);">
+                            <span style="margin-right: 12px; font-size: 1.5em; min-width: 35px; text-align: center;">🥇</span>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                    <div style="font-weight: 600; font-size: 1em;">Sarah Al-Mansouri</div>
+                                    <span style="font-size: 0.8em; background: #00a651; color: white; padding: 2px 8px; border-radius: 12px;">🏆 AI Champion</span>
+                                </div>
+                                <div style="font-size: 0.85em; color: #666; margin-bottom: 6px;">Senior Manager • Finance</div>
+                                <div style="display: flex; gap: 12px; font-size: 0.8em; color: #999;">
+                                    <span>📍 Dubai HQ</span>
+                                    <span>⚡ 98 adoption</span>
+                                    <span>🎯 42 tasks</span>
+                                    <span>⏱ 287h saved</span>
+                                </div>
+                                <div style="margin-top: 6px; display: flex; gap: 6px;">
+                                    <span style="background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.75em;">AI Process Expert</span>
+                                    <span style="background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.75em;">Innovation Leader</span>
+                                    <span style="background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.75em;">Excellence Award</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right; min-width: 80px;">
+                                <div style="font-weight: 700; font-size: 1.2em; color: #00a651;">9,850</div>
+                                <div style="font-size: 0.8em; color: #999;">points</div>
+                                <div style="font-size: 0.8em; color: #999; margin-top: 4px;">🔥 87d streak</div>
+                            </div>
+                        </div>
+
+                        <!-- Top Performer 2 -->
+                        <div style="display: flex; align-items: center; padding: 16px; border-bottom: 1px solid #eee; background: linear-gradient(90deg, rgba(0,166,81,0.05) 0%, transparent 100%);">
+                            <span style="margin-right: 12px; font-size: 1.5em; min-width: 35px; text-align: center;">🥈</span>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                    <div style="font-weight: 600; font-size: 1em;">Mohammed Al-Dosari</div>
+                                    <span style="font-size: 0.8em; background: #00a651; color: white; padding: 2px 8px; border-radius: 12px;">🥈 Innovation Leader</span>
+                                </div>
+                                <div style="font-size: 0.85em; color: #666; margin-bottom: 6px;">Team Lead • Operations</div>
+                                <div style="display: flex; gap: 12px; font-size: 0.8em; color: #999;">
+                                    <span>📍 Dubai HQ</span>
+                                    <span>⚡ 96 adoption</span>
+                                    <span>🎯 38 tasks</span>
+                                    <span>⏱ 251h saved</span>
+                                </div>
+                                <div style="margin-top: 6px; display: flex; gap: 6px;">
+                                    <span style="background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.75em;">Automation Master</span>
+                                    <span style="background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.75em;">Team Catalyst</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right; min-width: 80px;">
+                                <div style="font-weight: 700; font-size: 1.2em; color: #00a651;">9,245</div>
+                                <div style="font-size: 0.8em; color: #999;">points</div>
+                                <div style="font-size: 0.8em; color: #999; margin-top: 4px;">🔥 72d streak</div>
+                            </div>
+                        </div>
+
+                        <!-- Top Performer 3 -->
+                        <div style="display: flex; align-items: center; padding: 16px; border-bottom: 1px solid #eee; background: linear-gradient(90deg, rgba(0,166,81,0.05) 0%, transparent 100%);">
+                            <span style="margin-right: 12px; font-size: 1.5em; min-width: 35px; text-align: center;">🥉</span>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                    <div style="font-weight: 600; font-size: 1em;">Fatima Al-Mansoori</div>
+                                    <span style="font-size: 0.8em; background: #00a651; color: white; padding: 2px 8px; border-radius: 12px;">🥉 Adoption Pioneer</span>
+                                </div>
+                                <div style="font-size: 0.85em; color: #666; margin-bottom: 6px;">Senior Specialist • Technology</div>
+                                <div style="display: flex; gap: 12px; font-size: 0.8em; color: #999;">
+                                    <span>📍 Dubai HQ</span>
+                                    <span>⚡ 94 adoption</span>
+                                    <span>🎯 35 tasks</span>
+                                    <span>⏱ 238h saved</span>
+                                </div>
+                                <div style="margin-top: 6px; display: flex; gap: 6px;">
+                                    <span style="background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.75em;">Tech Pioneer</span>
+                                    <span style="background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.75em;">Quick Learner</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right; min-width: 80px;">
+                                <div style="font-weight: 700; font-size: 1.2em; color: #00a651;">8,920</div>
+                                <div style="font-size: 0.8em; color: #999;">points</div>
+                                <div style="font-size: 0.8em; color: #999; margin-top: 4px;">🔥 65d streak</div>
+                            </div>
+                        </div>
+
+                        <!-- Top Performer 4 -->
+                        <div style="display: flex; align-items: center; padding: 16px; border-bottom: 1px solid #eee;">
+                            <span style="margin-right: 12px; font-size: 1.5em; min-width: 35px; text-align: center;">⭐</span>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                    <div style="font-weight: 600; font-size: 1em;">Ahmed Al-Mazrouei</div>
+                                </div>
+                                <div style="font-size: 0.85em; color: #666; margin-bottom: 6px;">Business Analyst • Business</div>
+                                <div style="display: flex; gap: 12px; font-size: 0.8em; color: #999;">
+                                    <span>📍 Dubai HQ</span>
+                                    <span>⚡ 92 adoption</span>
+                                    <span>🎯 32 tasks</span>
+                                    <span>⏱ 216h saved</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right; min-width: 80px;">
+                                <div style="font-weight: 700; font-size: 1.2em; color: #00a651;">8,540</div>
+                                <div style="font-size: 0.8em; color: #999;">points</div>
+                                <div style="font-size: 0.8em; color: #999; margin-top: 4px;">🔥 52d streak</div>
+                            </div>
+                        </div>
+
+                        <!-- Top Performer 5 -->
+                        <div style="display: flex; align-items: center; padding: 16px; border-bottom: 1px solid #eee;">
+                            <span style="margin-right: 12px; font-size: 1.5em; min-width: 35px; text-align: center;">⭐</span>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                    <div style="font-weight: 600; font-size: 1em;">Layla Al-Naqbi</div>
+                                </div>
+                                <div style="font-size: 0.85em; color: #666; margin-bottom: 6px;">Consultant • Finance</div>
+                                <div style="display: flex; gap: 12px; font-size: 0.8em; color: #999;">
+                                    <span>📍 Dubai HQ</span>
+                                    <span>⚡ 90 adoption</span>
+                                    <span>🎯 30 tasks</span>
+                                    <span>⏱ 205h saved</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right; min-width: 80px;">
+                                <div style="font-weight: 700; font-size: 1.2em; color: #00a651;">8,120</div>
+                                <div style="font-size: 0.8em; color: #999;">points</div>
+                                <div style="font-size: 0.8em; color: #999; margin-top: 4px;">🔥 48d streak</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="leaderboard-container" style="margin-top: 24px;">
+                    <h3>🎖️ Your Badges</h3>
+                    <div class="badges-grid" id="badgesGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;">
+                        <div style="padding: 16px; border: 1px solid #eee; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.8em; margin-bottom: 8px;">🚀</div>
+                            <div style="font-weight: 500; font-size: 0.9em;">Quick Learner</div>
+                            <div style="font-size: 0.75em; color: #999; margin-top: 4px;">Completed 3 courses</div>
+                        </div>
+                        <div style="padding: 16px; border: 1px solid #eee; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.8em; margin-bottom: 8px;">⚡</div>
+                            <div style="font-weight: 500; font-size: 0.9em;">Automation Master</div>
+                            <div style="font-size: 0.75em; color: #999; margin-top: 4px;">Automated 10+ processes</div>
+                        </div>
+                        <div style="padding: 16px; border: 1px solid #eee; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.8em; margin-bottom: 8px;">🏆</div>
+                            <div style="font-weight: 500; font-size: 0.9em;">Top Contributor</div>
+                            <div style="font-size: 0.75em; color: #999; margin-top: 4px;">In top 5 for adoption</div>
+                        </div>
+                        <div style="padding: 16px; border: 1px solid #eee; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.8em; margin-bottom: 8px;">🌟</div>
+                            <div style="font-weight: 500; font-size: 0.9em;">Innovation Champion</div>
+                            <div style="font-size: 0.75em; color: #999; margin-top: 4px;">Suggested 5+ improvements</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tools Section -->
+            <section id="tools-section" class="content-section">
+                <div class="section-header">
+                    <h2>Approved AI Tools</h2>
+                    <p class="section-subtitle">Discover and access DEWA approved AI solutions</p>
+                </div>
+
+                <div class="tools-search">
+                    <input type="text" id="toolsSearchInput" placeholder="Search tools...">
+                </div>
+
+                <div class="tools-filters">
+                    <button class="filter-chip active" data-filter="all">All</button>
+                    <button class="filter-chip" data-filter="productivity">Productivity</button>
+                    <button class="filter-chip" data-filter="analytics">Analytics</button>
+                    <button class="filter-chip" data-filter="operations">Operations</button>
+                </div>
+
+                <div class="tools-list" id="toolsList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
+                    <!-- PRODUCTIVITY CATEGORY -->
+                    <!-- Copilot for M365 -->
+                    <div style="padding: 20px; border: 1px solid #eee; border-radius: 8px; background: white; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'" onclick="window.open('https://copilot.microsoft.com', '_blank')">
+                        <div style="font-size: 2em; margin-bottom: 8px;">🤖</div>
+                        <div style="display: inline-block; background: #e8f5e9; color: #00a651; padding: 4px 8px; border-radius: 4px; font-size: 0.7em; margin-bottom: 8px;">PRODUCTIVITY</div>
+                        <h3 style="margin: 12px 0; font-size: 1.1em; color: #333;">Copilot for M365</h3>
+                        <p style="font-size: 0.9em; color: #666; margin: 8px 0;">AI assistant across Office 365 apps for enhanced productivity</p>
+                        <div style="margin-top: 12px; display: flex; gap: 8px;">
+                            <span style="background: #fff3e0; color: #f57c00; padding: 4px 8px; border-radius: 4px; font-size: 0.8em;">Approved</span>
+                            <span style="background: #c8e6c9; color: #00a651; padding: 4px 8px; border-radius: 4px; font-size: 0.8em;">Active</span>
+                        </div>
+                        <button type="button" style="display: block; width: 100%; margin-top: 12px; padding: 10px; background: #00a651; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; text-align: center;">Open Tool</button>
+                    </div>
+
+                    <!-- Email Assistant -->
+                    <div style="padding: 20px; border: 1px solid #eee; border-radius: 8px; background: white; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'" onclick="window.open('https://outlook.office.com', '_blank')">
+                        <div style="font-size: 2em; margin-bottom: 8px;">✉️</div>
+                        <div style="display: inline-block; background: #e8f5e9; color: #00a651; padding: 4px 8px; border-radius: 4px; font-size: 0.7em; margin-bottom: 8px;">PRODUCTIVITY</div>
+                        <h3 style="margin: 12px 0; font-size: 1.1em; color: #333;">Email Assistant</h3>
+                        <p style="font-size: 0.9em; color: #666; margin: 8px 0;">AI-powered email drafting with tone adjustment</p>
+                        <div style="margin-top: 12px; display: flex; gap: 8px;">
+                            <span style="background: #c8e6c9; color: #00a651; padding: 4px 8px; border-radius: 4px; font-size: 0.8em;">Active</span>
+                        </div>
+                        <button type="button" style="display: block; width: 100%; margin-top: 12px; padding: 10px; background: #00a651; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; text-align: center;">Open Tool</button>
+                    </div>
+
+                    <!-- Document Summarizer -->
+                    <div style="padding: 20px; border: 1px solid #eee; border-radius: 8px; background: white; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'" onclick="window.open('https://chatgpt.com', '_blank')">
+                        <div style="font-size: 2em; margin-bottom: 8px;">📄</div>
+                        <div style="display: inline-block; background: #e8f5e9; color: #00a651; padding: 4px 8px; border-radius: 4px; font-size: 0.7em; margin-bottom: 8px;">PRODUCTIVITY</div>
+                        <h3 style="margin: 12px 0; font-size: 1.1em; color: #333;">Document Summarizer</h3>
+                        <p style="font-size: 0.9em; color: #666; margin: 8px 0;">Extract insights and generate concise summaries</p>
+                        <div style="margin-top: 12px; display: flex; gap: 8px;">
+                            <span style="background: #e3f2fd; color: #1976d2; padding: 4px 8px; border-radius: 4px; font-size: 0.8em;">Pending</span>
+                        </div>
+                        <button type="button" style="display: block; width: 100%; margin-top: 12px; padding: 10px; background: #00a651; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; text-align: center;">Open Tool</button>
+                    </div>
+
+                    <!-- ANALYTICS CATEGORY -->
+                    <!-- Data Insight Assistant -->
+                    <div style="padding: 20px; border: 1px solid #eee; border-radius: 8px; background: white; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'" onclick="window.open('https://app.powerbi.com', '_blank')">
+                        <div style="font-size: 2em; margin-bottom: 8px;">📊</div>
+                        <div style="display: inline-block; background: #f3e5f5; color: #7b1fa2; padding: 4px 8px; border-radius: 4px; font-size: 0.7em; margin-bottom: 8px;">ANALYTICS</div>
+                        <h3 style="margin: 12px 0; font-size: 1.1em; color: #333;">Data Insight Assistant</h3>
+                        <p style="font-size: 0.9em; color: #666; margin: 8px 0;">AI-powered analytics and trend forecasting</p>
+                        <div style="margin-top: 12px; display: flex; gap: 8px;">
+                            <span style="background: #c8e6c9; color: #00a651; padding: 4px 8px; border-radius: 4px; font-size: 0.8em;">Active</span>
+                        </div>
+                        <button type="button" style="display: block; width: 100%; margin-top: 12px; padding: 10px; background: #00a651; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; text-align: center;">Open Tool</button>
+                    </div>
+
+                    <!-- OPERATIONS CATEGORY -->
+                    <!-- Process Optimizer -->
+                    <div style="padding: 20px; border: 1px solid #eee; border-radius: 8px; background: white; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'" onclick="window.open('https://flow.microsoft.com', '_blank')">
+                        <div style="font-size: 2em; margin-bottom: 8px;">⚙️</div>
+                        <div style="display: inline-block; background: #fce4ec; color: #c2185b; padding: 4px 8px; border-radius: 4px; font-size: 0.7em; margin-bottom: 8px;">OPERATIONS</div>
+                        <h3 style="margin: 12px 0; font-size: 1.1em; color: #333;">Process Optimizer</h3>
+                        <p style="font-size: 0.9em; color: #666; margin: 8px 0;">Identify bottlenecks and automate workflows</p>
+                        <div style="margin-top: 12px; display: flex; gap: 8px;">
+                            <span style="background: #c8e6c9; color: #00a651; padding: 4px 8px; border-radius: 4px; font-size: 0.8em;">Active</span>
+                        </div>
+                        <button type="button" style="display: block; width: 100%; margin-top: 12px; padding: 10px; background: #00a651; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; text-align: center;">Open Tool</button>
+                    </div>
+
+                    <!-- Predictive Maintenance Bot -->
+                    <div style="padding: 20px; border: 1px solid #eee; border-radius: 8px; background: white; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'" onclick="window.open('https://azure.microsoft.com/en-us/products/machine-learning', '_blank')">
+                        <div style="font-size: 2em; margin-bottom: 8px;">🔧</div>
+                        <div style="display: inline-block; background: #fce4ec; color: #c2185b; padding: 4px 8px; border-radius: 4px; font-size: 0.7em; margin-bottom: 8px;">OPERATIONS</div>
+                        <h3 style="margin: 12px 0; font-size: 1.1em; color: #333;">Predictive Maintenance Bot</h3>
+                        <p style="font-size: 0.9em; color: #666; margin: 8px 0;">Predict equipment failures and optimize schedules</p>
+                        <div style="margin-top: 12px; display: flex; gap: 8px;">
+                            <span style="background: #c8e6c9; color: #00a651; padding: 4px 8px; border-radius: 4px; font-size: 0.8em;">Active</span>
+                        </div>
+                        <button type="button" style="display: block; width: 100%; margin-top: 12px; padding: 10px; background: #00a651; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; text-align: center;">Open Tool</button>
+                    </div>
+
+                    <!-- SUPPORT CATEGORY -->
+                    <!-- AI Chatbot -->
+                    <div style="padding: 20px; border: 1px solid #eee; border-radius: 8px; background: white; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'" onclick="window.open('https://chatgpt.com', '_blank')">
+                        <div style="font-size: 2em; margin-bottom: 8px;">💬</div>
+                        <div style="display: inline-block; background: #e0f2f1; color: #00796b; padding: 4px 8px; border-radius: 4px; font-size: 0.7em; margin-bottom: 8px;">SUPPORT</div>
+                        <h3 style="margin: 12px 0; font-size: 1.1em; color: #333;">AI Chatbot</h3>
+                        <p style="font-size: 0.9em; color: #666; margin: 8px 0;">24/7 intelligent support and knowledge assistance</p>
+                        <div style="margin-top: 12px; display: flex; gap: 8px;">
+                            <span style="background: #fff3e0; color: #f57c00; padding: 4px 8px; border-radius: 4px; font-size: 0.8em;">Approved</span>
+                            <span style="background: #c8e6c9; color: #00a651; padding: 4px 8px; border-radius: 4px; font-size: 0.8em;">Active</span>
+                        </div>
+                        <button type="button" style="display: block; width: 100%; margin-top: 12px; padding: 10px; background: #00a651; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; text-align: center;">Open Tool</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learning Section -->
+            <section id="learning-section" class="content-section">
+                <div class="section-header">
+                    <h2>Learning Center</h2>
+                    <p class="section-subtitle">Master AI adoption with curated learning paths</p>
+                </div>
+
+                <div class="learning-path-container">
+                    <h3>Your Learning Path</h3>
+                    <div class="learning-path" id="learningPath">
+                        <div class="placeholder">Loading learning path...</div>
+                    </div>
+                </div>
+
+                <div class="learning-resources-container" style="margin-top: 24px;">
+                    <h3>Recommended Resources</h3>
+                    <div class="resources-grid" id="resourcesGrid">
+                        <div class="placeholder">Loading resources...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ROI Section -->
+            <section id="roi-section" class="content-section">
+                <div class="section-header">
+                    <h2>ROI & Value Tracking</h2>
+                    <p class="section-subtitle">Quantify business value from AI adoption</p>
+                </div>
+
+                <div class="roi-grid">
+                    <div class="roi-card">
+                        <div class="roi-label">Total Hours Saved</div>
+                        <div class="roi-value" id="totalHoursSaved">--</div>
+                        <div class="roi-unit">in 2026</div>
+                    </div>
+
+                    <div class="roi-card">
+                        <div class="roi-label">Estimated Value</div>
+                        <div class="roi-value" id="estimatedValue">--</div>
+                        <div class="roi-unit">AED</div>
+                    </div>
+
+                    <div class="roi-card">
+                        <div class="roi-label">Org Participation</div>
+                        <div class="roi-value" id="participation">--</div>
+                        <div class="roi-unit">%</div>
+                    </div>
+
+                    <div class="roi-card">
+                        <div class="roi-label">Your Rank</div>
+                        <div class="roi-value" id="yourRank">--</div>
+                        <div class="roi-unit">in department</div>
+                    </div>
+                </div>
+
+                <div class="disclaimer">
+                    ⚠️ ROI estimates are based on conservative benchmarks. All values require human validation and are not used for performance evaluation.
+                </div>
+            </section>
+
+            <!-- AI Insights Section -->
+            <section id="ai-insights-section" class="content-section">
+                <div class="section-header">
+                    <h2>🧠 AI-Powered Insights</h2>
+                    <p class="section-subtitle">Intelligent analytics about your AI adoption journey</p>
+                </div>
+
+                <!-- Predictive Analytics -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 24px; border-radius: 12px; margin-bottom: 24px;">
+                    <h3 style="margin-top: 0; display: flex; align-items: center; gap: 10px;">🔮 Predictive Analytics</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 16px; border-radius: 8px;">
+                            <div style="font-size: 0.9em; opacity: 0.9;">Adoption Completion</div>
+                            <div style="font-size: 2em; font-weight: bold; margin-top: 8px;" id="predictedCompletion">78%</div>
+                            <div style="font-size: 0.8em; opacity: 0.8; margin-top: 4px;">by Q2 2026</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 16px; border-radius: 8px;">
+                            <div style="font-size: 0.9em; opacity: 0.9;">Next Milestone</div>
+                            <div style="font-size: 2em; font-weight: bold; margin-top: 8px;" id="nextMilestone">750 pts</div>
+                            <div style="font-size: 0.8em; opacity: 0.8; margin-top: 4px;">in 21 days</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 16px; border-radius: 8px;">
+                            <div style="font-size: 0.9em; opacity: 0.9;">Success Probability</div>
+                            <div style="font-size: 2em; font-weight: bold; margin-top: 8px;" id="successProbability">92%</div>
+                            <div style="font-size: 0.8em; opacity: 0.8; margin-top: 4px;">adoption success</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trend Analysis -->
+                <div style="background: #f9f9f9; padding: 20px; border-radius: 12px; margin-bottom: 24px; border-left: 4px solid #00a651;">
+                    <h3 style="margin-top: 0; display: flex; align-items: center; gap: 10px;">📈 Trend Analysis</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid #eee;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: #666;">Tool Adoption Rate</span>
+                                <span style="background: #e8f5e9; color: #00a651; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9em;">↑ 23%</span>
+                            </div>
+                            <div style="margin-top: 8px; height: 4px; background: #eee; border-radius: 2px; overflow: hidden;">
+                                <div style="height: 100%; width: 75%; background: linear-gradient(90deg, #00a651, #00d4ff); border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                        <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid #eee;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: #666;">Learning Progress</span>
+                                <span style="background: #e3f2fd; color: #1976d2; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9em;">↑ 18%</span>
+                            </div>
+                            <div style="margin-top: 8px; height: 4px; background: #eee; border-radius: 2px; overflow: hidden;">
+                                <div style="height: 100%; width: 68%; background: linear-gradient(90deg, #1976d2, #42a5f5); border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                        <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid #eee;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: #666;">Engagement Score</span>
+                                <span style="background: #fff3e0; color: #f57c00; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9em;">↑ 31%</span>
+                            </div>
+                            <div style="margin-top: 8px; height: 4px; background: #eee; border-radius: 2px; overflow: hidden;">
+                                <div style="height: 100%; width: 82%; background: linear-gradient(90deg, #f57c00, #ffb74d); border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Recommendations -->
+                <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #eee;">
+                    <h3 style="margin-top: 0; display: flex; align-items: center; gap: 10px;">💡 AI Recommendations Based on Your Profile</h3>
+                    <div id="aiRecommendations" style="margin-top: 16px;">
+                        <div style="text-align: center; color: #999; padding: 20px;">Loading recommendations...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommendations Section -->
+            <section id="recommendations-section" class="content-section">
+                <div class="section-header">
+                    <h2>✨ Personalized Recommendations</h2>
+                    <p class="section-subtitle">AI-curated tools and learning paths tailored for you</p>
+                </div>
+
+                <!-- Tool Recommendations -->
+                <div style="margin-bottom: 24px;">
+                    <h3 style="display: flex; align-items: center; gap: 10px; color: #333;">🎯 Recommended Tools For You</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px;" id="recommendedTools">
+                        <div style="text-align: center; color: #999; padding: 20px;">Loading tool recommendations...</div>
+                    </div>
+                </div>
+
+                <!-- Learning Recommendations -->
+                <div style="margin-bottom: 24px;">
+                    <h3 style="display: flex; align-items: center; gap: 10px; color: #333;">📚 Learning Recommendations</h3>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 16px;" id="recommendedLearning">
+                        <div style="text-align: center; color: #999; padding: 20px;">Loading learning recommendations...</div>
+                    </div>
+                </div>
+
+                <!-- Peer Insights -->
+                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 20px; border-radius: 12px;">
+                    <h3 style="margin-top: 0; display: flex; align-items: center; gap: 10px;">👥 Peer Insights</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px;">
+                        <div style="background: rgba(255,255,255,0.15); padding: 16px; border-radius: 8px;">
+                            <div style="font-size: 0.9em; opacity: 0.95;">High Performers in Your Team</div>
+                            <div style="font-size: 1.5em; font-weight: bold; margin-top: 8px;" id="highPerformers">--</div>
+                            <div style="font-size: 0.8em; opacity: 0.8; margin-top: 4px;">are ahead of you</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.15); padding: 16px; border-radius: 8px;">
+                            <div style="font-size: 0.9em; opacity: 0.95;">Most Popular Tool</div>
+                            <div style="font-size: 1.5em; font-weight: bold; margin-top: 8px;" id="popularTool">--</div>
+                            <div style="font-size: 0.8em; opacity: 0.8; margin-top: 4px;">adoption growing</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.15); padding: 16px; border-radius: 8px;">
+                            <div style="font-size: 0.9em; opacity: 0.95;">Your Advantage</div>
+                            <div style="font-size: 1.5em; font-weight: bold; margin-top: 8px;" id="yourAdvantage">+12%</div>
+                            <div style="font-size: 0.8em; opacity: 0.8; margin-top: 4px;">faster learner</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="content-section">
+                <div class="section-header">
+                    <h2>Settings</h2>
+                    <p class="section-subtitle">Manage your preferences</p>
+                </div>
+
+                <div class="settings-card">
+                    <h3>Notifications</h3>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="notifBadges" checked>
+                            Email me when I earn a badge
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="notifChallenges" checked>
+                            Notify me about monthly challenges
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="notifLeaderboard" checked>
+                            Show me on leaderboards
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h3>Privacy</h3>
+                    <p style="color: #666; margin-bottom: 12px; font-size: 0.9em;">
+                        Your adoption metrics are private and only visible to you and your managers. 
+                        Leaderboards are anonymized and highlight roles, not individuals.
+                    </p>
+                </div>
+
+                <div class="settings-card">
+                    <h3>Help & Support</h3>
+                    <button class="btn btn-secondary">Chat with Rammas</button>
+                    <p style="color: #666; margin-top: 12px; font-size: 0.9em;">
+                        Questions? Contact AI.Support@dewa.gov.ae
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Tool Modal -->
+    <div id="toolModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border-radius: 12px; width: 90%; max-width: 900px; height: 85vh; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+            <!-- Modal Header -->
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid #eee; background: linear-gradient(90deg, #00a651 0%, #008c41 100%);">
+                <h2 id="toolModalTitle" style="margin: 0; color: white; font-size: 1.4em;">Loading Tool...</h2>
+                <button onclick="closeToolModal()" style="background: none; border: none; font-size: 1.5em; cursor: pointer; color: white; cursor: pointer;">✕</button>
+            </div>
+
+            <!-- Modal Content -->
+            <div id="toolModalContent" style="flex: 1; overflow-y: auto; padding: 24px; background: #f9f9f9;">
+                <div style="text-align: center; padding: 40px 20px;">
+                    <div style="font-size: 3em; margin-bottom: 16px;">🚀</div>
+                    <p style="font-size: 1.1em; color: #666; margin-bottom: 20px;">Tool is loading...</p>
+                    <div style="width: 40px; height: 40px; border: 4px solid #e0e0e0; border-top-color: #00a651; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div style="padding: 16px 24px; border-top: 1px solid #eee; background: white; text-align: right;">
+                <button onclick="closeToolModal()" style="padding: 10px 24px; background: #f0f0f0; border: none; border-radius: 4px; cursor: pointer; font-weight: 500;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="js/mockBackend.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/leaderboard.js"></script>
+    <script src="js/tools.js"></script>
+    <script src="js/learning.js"></script>
+    <script src="js/gamification.js"></script>
+    <script src="js/ai-features.js"></script>
+    <script src="js/app.js"></script>
+    
+    <!-- Test script to verify openTool function -->
+    <script>
+        console.log('Testing openTool function...');
+        console.log('openTool function exists:', typeof openTool === 'function');
+        console.log('closeToolModal function exists:', typeof closeToolModal === 'function');
+        console.log('Modal element:', document.getElementById('toolModal'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,638 @@
+/* ============================================
+   RESPONSIVE DESIGN - Mobile First
+   Smart Office WebView Optimizations
+   ============================================ */
+
+/* ============================================
+   MOBILE DEVICES (< 640px)
+   ============================================ */
+
+@media (max-width: 639px) {
+    /* Adjust font sizes for small screens */
+    :root {
+        --font-size-xl: 20px;
+        --font-size-lg: 16px;
+        --spacing-lg: 16px;
+        --spacing-md: 12px;
+    }
+
+    /* Stack layout vertically */
+    .app-container {
+        flex-direction: column;
+    }
+
+    .app-sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        overflow-x: auto;
+        flex-direction: row;
+    }
+
+    .nav-section {
+        display: flex;
+        flex-direction: column;
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-bottom: none;
+        border-right: 1px solid var(--border-color);
+        min-width: 120px;
+    }
+
+    .nav-label {
+        display: none;
+    }
+
+    .nav-link {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-md) var(--spacing-sm);
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        justify-content: center;
+        align-items: center;
+        font-size: var(--font-size-xs);
+        text-align: center;
+        padding-bottom: var(--spacing-sm);
+    }
+
+    .nav-link.active {
+        border-left: none;
+        border-bottom-color: var(--primary);
+        background: transparent;
+    }
+
+    .nav-icon {
+        font-size: 24px;
+        width: auto;
+    }
+
+    .nav-link span:last-child {
+        display: none;
+    }
+
+    .nav-link.active span:last-child {
+        display: inline;
+        font-size: var(--font-size-xs);
+    }
+
+    /* Main content padding */
+    .app-main {
+        padding: var(--spacing-md);
+    }
+
+    /* Scorecard grid - single column */
+    .scorecard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .score-card.big-score {
+        grid-column: 1;
+    }
+
+    /* Chart sizing */
+    .trend-chart {
+        max-height: 200px;
+    }
+
+    /* Tools grid */
+    .tools-list {
+        grid-template-columns: 1fr;
+    }
+
+    /* Badges grid */
+    .badges-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Learning resources */
+    .resources-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ROI grid */
+    .roi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Leaderboard adjustments */
+    .leaderboard-entry {
+        flex-wrap: wrap;
+    }
+
+    .leaderboard-score {
+        width: 100%;
+        text-align: left;
+        margin-top: var(--spacing-sm);
+        padding-top: var(--spacing-sm);
+        border-top: 1px solid var(--border-color);
+    }
+
+    /* Hide desktop-only content */
+    .desktop-only {
+        display: none;
+    }
+
+    /* Header adjustments */
+    .header-container {
+        padding: 0 var(--spacing-sm);
+    }
+
+    .header-logo h1 {
+        font-size: var(--font-size-md);
+    }
+
+    .user-info {
+        display: none;
+    }
+
+    .user-avatar {
+        width: 36px;
+        height: 36px;
+        font-size: var(--font-size-md);
+    }
+
+    /* Buttons */
+    .btn {
+        width: 100%;
+    }
+
+    /* Filter chips */
+    .tools-filters {
+        gap: var(--spacing-sm);
+    }
+
+    .filter-chip {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-xs);
+    }
+
+    /* Comparison panel */
+    .comparison-panel {
+        padding: var(--spacing-md);
+    }
+
+    .comparison-item {
+        margin-bottom: var(--spacing-md);
+    }
+
+    /* Score delta visibility */
+    .score-delta {
+        font-size: var(--font-size-xs);
+    }
+
+    /* Tool card adjustments */
+    .tool-card {
+        padding: var(--spacing-md);
+    }
+
+    .tool-name {
+        font-size: var(--font-size-md);
+    }
+
+    .tool-description {
+        font-size: var(--font-size-xs);
+    }
+
+    /* Learning module adjustments */
+    .learning-module {
+        padding: var(--spacing-sm);
+    }
+
+    .module-title {
+        font-size: var(--font-size-sm);
+    }
+
+    .module-progress {
+        display: none;
+    }
+
+    /* Settings adjustments */
+    .setting-item input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* ============================================
+   TABLET DEVICES (640px - 1024px)
+   ============================================ */
+
+@media (min-width: 640px) and (max-width: 1024px) {
+    /* Adjust sidebar width */
+    .app-sidebar {
+        width: 200px;
+    }
+
+    /* Scorecard grid - 2 columns */
+    .scorecard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .score-card.big-score {
+        grid-column: 1 / -1;
+    }
+
+    /* Tools grid */
+    .tools-list {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+
+    /* Badges grid */
+    .badges-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Resources grid */
+    .resources-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* ROI grid */
+    .roi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Reduce padding */
+    .app-main {
+        padding: var(--spacing-lg);
+    }
+
+    /* Leaderboard entry adjustments */
+    .leaderboard-entry {
+        padding: var(--spacing-md);
+    }
+
+    .rank-badge {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    /* Navigation */
+    .nav-link {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .nav-link span:last-child {
+        display: inline;
+    }
+}
+
+/* ============================================
+   DESKTOP DEVICES (> 1024px)
+   ============================================ */
+
+@media (min-width: 1025px) {
+    /* Scorecard grid - 4 columns */
+    .scorecard-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .score-card.big-score {
+        grid-column: 1 / -1;
+    }
+
+    /* Tools grid */
+    .tools-list {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    /* Badges grid */
+    .badges-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    /* Resources grid */
+    .resources-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* ROI grid */
+    .roi-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Leaderboard */
+    .leaderboard-entry {
+        padding: var(--spacing-lg);
+    }
+
+    .rank-badge {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+}
+
+/* ============================================
+   ORIENTATION ADJUSTMENTS
+   ============================================ */
+
+@media (orientation: landscape) and (max-height: 500px) {
+    .app-header {
+        height: 48px;
+    }
+
+    .header-container {
+        padding: 0 var(--spacing-md);
+    }
+
+    .header-logo h1 {
+        font-size: var(--font-size-md);
+    }
+
+    .app-container {
+        height: calc(100vh - 48px);
+        margin-top: 48px;
+    }
+
+    .scorecard-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-sm);
+    }
+
+    .score-card {
+        padding: var(--spacing-sm);
+    }
+
+    .score-value {
+        font-size: 32px;
+    }
+
+    .app-main {
+        padding: var(--spacing-md);
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+    .app-header,
+    .app-sidebar,
+    .btn,
+    .tools-filters,
+    .tools-search,
+    .nav-link {
+        display: none;
+    }
+
+    .app-container {
+        flex-direction: column;
+    }
+
+    .app-main {
+        padding: 0;
+        background: white;
+    }
+
+    .content-section {
+        page-break-inside: avoid;
+        display: block !important;
+    }
+
+    .score-card {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid var(--border-color);
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY - HIGH CONTRAST MODE
+   ============================================ */
+
+@media (prefers-contrast: more) {
+    :root {
+        --text-primary: #000;
+        --text-secondary: #333;
+        --border-color: #000;
+    }
+
+    .app-header {
+        border-bottom: 2px solid #000;
+    }
+
+    .nav-link {
+        border: 1px solid var(--border-color);
+    }
+
+    .nav-link.active {
+        border-width: 2px;
+    }
+
+    .btn {
+        border: 1px solid currentColor;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY - REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .spinner {
+        animation: none;
+        border-top: 2px solid var(--primary);
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY - DARK MODE
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #1e1e1e;
+        --bg-secondary: #121212;
+        --bg-tertiary: #2d2d2d;
+        --text-primary: #ffffff;
+        --text-secondary: #b3b3b3;
+        --text-tertiary: #808080;
+        --border-color: #404040;
+    }
+
+    .app-header {
+        background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+    }
+
+    .user-avatar {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .score-card:not(.big-score) {
+        background: #2d2d2d;
+    }
+
+    .progress-bar {
+        background: #404040;
+    }
+
+    .leaderboard-entry,
+    .learning-module {
+        background: #2d2d2d;
+    }
+
+    .disclaimer {
+        background: rgba(255, 152, 0, 0.1);
+        color: #b3b3b3;
+    }
+}
+
+/* ============================================
+   SMART OFFICE SPECIFIC OPTIMIZATIONS
+   ============================================ */
+
+/* Safe area insets for notched devices */
+body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+}
+
+.app-header {
+    padding-top: env(safe-area-inset-top);
+}
+
+/* Touch-friendly sizing */
+@media (hover: none) and (pointer: coarse) {
+    .nav-link,
+    .btn,
+    .tool-card,
+    .badge-card,
+    .leaderboard-entry,
+    .filter-chip {
+        min-height: 48px;
+        min-width: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .filter-chip {
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+
+    /* Larger touch targets for icons */
+    .nav-icon {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Increased input sizing for touch */
+    input[type="text"],
+    input[type="checkbox"],
+    select {
+        min-height: 44px;
+    }
+
+    input[type="checkbox"] {
+        min-width: 24px;
+        min-height: 24px;
+    }
+
+    /* Better tap targets for links */
+    a {
+        padding: 8px;
+    }
+
+    /* Hover effects disabled on touch devices */
+    .score-card:hover,
+    .tool-card:hover,
+    .leaderboard-entry:hover {
+        transform: none;
+    }
+
+    /* Active state instead of hover */
+    .score-card:active,
+    .tool-card:active,
+    .leaderboard-entry:active {
+        opacity: 0.8;
+    }
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+/* Reduce animations for performance */
+@media (prefers-reduced-motion: no-preference) {
+    .content-section {
+        animation: fadeIn 0.3s ease-in;
+    }
+
+    .score-card,
+    .tool-card,
+    .leaderboard-entry {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+}
+
+/* Optimize for very small screens (< 360px) */
+@media (max-width: 359px) {
+    :root {
+        --spacing-lg: 12px;
+        --spacing-md: 8px;
+        --font-size-xl: 18px;
+        --font-size-lg: 14px;
+    }
+
+    .scorecard-grid {
+        gap: var(--spacing-md);
+    }
+
+    .score-value {
+        font-size: 32px;
+    }
+
+    .badge-icon {
+        font-size: 36px;
+    }
+
+    .badges-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ============================================
+   SCROLLING OPTIMIZATIONS
+   ============================================ */
+
+.app-main {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+.app-sidebar {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ============================================
+   FOCUS STYLES FOR ACCESSIBILITY
+   ============================================ */
+
+.nav-link:focus,
+.btn:focus,
+.filter-chip:focus,
+input:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
