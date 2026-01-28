@@ -1,0 +1,41 @@
+# Ignore compiled Python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node and npm
+node_modules/
+npm-debug.log
+
+# Local development files
+.env
+.env.local
+config.local.json
+
+# Logs
+*.log
+
+# Temp files
+*.tmp
+*.temp
+
+# Build directories
+build/
+dist/
+*.egg-info/
